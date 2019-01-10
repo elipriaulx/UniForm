@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniForm.Core", "UniForm.Core\UniForm.Core.csproj", "{04004B39-E6D7-4FC7-99C6-6B1C98468854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniForm.Engine", "UniForm.Engine\UniForm.Engine.csproj", "{0A3DA250-AA34-4852-99EE-8067A6C47542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniForm.Wpf", "UniForm.Wpf\UniForm.Wpf.csproj", "{36C9C5AF-5BD4-487A-B583-4BD50896280E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniForm.Examples.Wpf", "UniForm.Examples.Wpf\UniForm.Examples.Wpf.csproj", "{B7FFEC58-1FF0-4CAB-8AAD-5B1E4FED2A19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{5665647E-6799-4CBE-8E75-AB554B7A2FF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{D16B9270-4BB9-41C6-8DCA-BB4C1F11F1C1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04004B39-E6D7-4FC7-99C6-6B1C98468854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04004B39-E6D7-4FC7-99C6-6B1C98468854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04004B39-E6D7-4FC7-99C6-6B1C98468854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04004B39-E6D7-4FC7-99C6-6B1C98468854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A3DA250-AA34-4852-99EE-8067A6C47542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A3DA250-AA34-4852-99EE-8067A6C47542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A3DA250-AA34-4852-99EE-8067A6C47542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A3DA250-AA34-4852-99EE-8067A6C47542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C9C5AF-5BD4-487A-B583-4BD50896280E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C9C5AF-5BD4-487A-B583-4BD50896280E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C9C5AF-5BD4-487A-B583-4BD50896280E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C9C5AF-5BD4-487A-B583-4BD50896280E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7FFEC58-1FF0-4CAB-8AAD-5B1E4FED2A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7FFEC58-1FF0-4CAB-8AAD-5B1E4FED2A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7FFEC58-1FF0-4CAB-8AAD-5B1E4FED2A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7FFEC58-1FF0-4CAB-8AAD-5B1E4FED2A19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B7FFEC58-1FF0-4CAB-8AAD-5B1E4FED2A19} = {5665647E-6799-4CBE-8E75-AB554B7A2FF9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDDA5C35-F289-43F4-BBF4-CCD3EB005CEE}
+	EndGlobalSection
+EndGlobal
