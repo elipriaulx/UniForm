@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Models\ExampleConfigurationWithoutRootAttribute.cs" />
     <Compile Include="Models\ExampleConfigurationWithRootAttribute.cs" />
+    <Compile Include="Models\ExampleEnumOfAnimals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

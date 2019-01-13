@@ -3,10 +3,13 @@ using UniForm.Core.Attributes;
 
 namespace UniForm.Examples.Wpf.Models
 {
-    [UniForm("Example Form", "An example UniForm form.", false)]
+    [UniForm("Animal Form", "An example of a UniForm form.", false)]
     public class ExampleConfigurationWithRootAttribute
     {
-        public int BeaverCount { get; set; } = 4;
+        [UniFormField("Animal Type", "Your favourite type of animal.")]
+        public ExampleEnumOfAnimals AnimalType { get; set; }
+        
+        public int Count { get; set; } = 4;
 
         [UniFormField("Magic Number", "A Magic Number that must definitely not be 3.")]
         public int MagicNumber { get; set; } = 23;

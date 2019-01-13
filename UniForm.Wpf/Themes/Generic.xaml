@@ -2,10 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:UniForm.Wpf"
-    xmlns:forms="clr-namespace:UniForm.Engine.Forms;assembly=UniForm.Engine">
-
+    xmlns:forms="clr-namespace:UniForm.Engine.Forms;assembly=UniForm.Engine"
+    xmlns:controls="clr-namespace:UniForm.Wpf.Controls" 
+    xmlns:models="clr-namespace:UniForm.Wpf.Controls.Models">
 
     <Style TargetType="{x:Type local:UniFormControl}">
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:UniFormControl}">
@@ -15,19 +17,58 @@
                         <ItemsControl ItemsSource="{TemplateBinding FormFields}">
                             <ItemsControl.Resources>
                                 <DataTemplate DataType="{x:Type forms:UniFormFieldBool}">
-                                    <CheckBox IsChecked="{Binding Value}" Content="{Binding Name}" ToolTip="{Binding Description}" />
+                                    <CheckBox IsChecked="{Binding Value}" />
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type forms:UniFormField}">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Name}" ToolTip="{Binding Description}" />
                                     <TextBox Text="{Binding Value}"  />
-                                    </StackPanel>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type forms:UniFormFieldEnum}">
+                                    <controls:EnumBox SelectedItem="{Binding Value, Mode=TwoWay}"  />
                                 </DataTemplate>
                             </ItemsControl.Resources>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:UniFormFieldControl Title="{Binding Name}" ToolTip="{Binding Description}" Content="{Binding}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:UniFormFieldControl}">
+        <Setter Property="Margin" Value="0,2" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:UniFormFieldControl}">
+                    <StackPanel Margin="{TemplateBinding Margin}">
+                        <Label Content="{TemplateBinding Title}" Padding="0,2" />
+                        <ContentControl Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" IsTabStop="False" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style TargetType="{x:Type controls:EnumBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:EnumBox}">
+                    <ComboBox ItemsSource="{TemplateBinding AvailableItems}" SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=NominatedItem}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:EnumItem}">
+                                <TextBlock Text="{Binding Description}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -9,8 +9,8 @@
         Title="MainWindow" Height="450" Width="800">
 
     <UniformGrid Rows="1">
-        <wpf:UniFormControl Content="{Binding ExampleA}" />
-        <wpf:UniFormControl Content="{Binding ExampleB}" />
+        <wpf:UniFormControl Margin="10" Content="{Binding ExampleA}" />
+        <wpf:UniFormControl Margin="10" Content="{Binding ExampleB}" />
     </UniformGrid>
 
 </Window>

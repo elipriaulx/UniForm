@@ -87,7 +87,7 @@ namespace UniForm.Engine.Generation
             {
                 f = new UniFormFieldString(i, o, name, description, priority);
             }
-            else if (t == typeof(Enum))
+            else if (t.BaseType == typeof(Enum))
             {
                 f = new UniFormFieldEnum(i, o, name, description, priority);
             }
