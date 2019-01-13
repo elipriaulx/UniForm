@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>gpriaulx.co</authors>
+    <owners>gpriaulx.co</owners>
+    <license type="file">LICENSE</license>
+    <projectUrl>https://github.com/gpriaulx/UniForm</projectUrl>
+    <iconUrl>https://github.com/gpriaulx/UniForm/raw/master/Assets/UniForm-Branding.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.Net form generation platform.</description>
+    <releaseNotes>Initial PoC</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>.Net Form Generation WPF</tags>
+  </metadata>
+  <files>
+    <file src="..\LICENSE" target="LICENSE" />
+  </files>
+</package>

@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniForm.Examples.Wpf"
+        xmlns:wpf="clr-namespace:UniForm.Wpf;assembly=UniForm.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+
+    <UniformGrid Rows="1">
+        <wpf:UniFormControl Content="{Binding ExampleA}" />
+        <wpf:UniFormControl Content="{Binding ExampleB}" />
+    </UniformGrid>
+
 </Window>

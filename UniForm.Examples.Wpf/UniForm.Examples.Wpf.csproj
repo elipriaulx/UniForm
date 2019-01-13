@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -69,6 +72,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ExampleConfigurationWithoutRootAttribute.cs" />
+    <Compile Include="Models\ExampleConfigurationWithRootAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +98,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniForm.Core\UniForm.Core.csproj">
+      <Project>{04004B39-E6D7-4FC7-99C6-6B1C98468854}</Project>
+      <Name>UniForm.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniForm.Engine\UniForm.Engine.csproj">
+      <Project>{0a3da250-aa34-4852-99ee-8067a6c47542}</Project>
+      <Name>UniForm.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniForm.Wpf\UniForm.Wpf.csproj">
+      <Project>{36c9c5af-5bd4-487a-b583-4bd50896280e}</Project>
+      <Name>UniForm.Wpf</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
