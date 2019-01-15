@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UniForm.Core.Attributes;
+using UniForm.Core.Attributes.Composition;
+using UniForm.Core.Models;
 using UniForm.Engine.Forms;
 
 namespace UniForm.Engine.Generation
@@ -11,13 +12,16 @@ namespace UniForm.Engine.Generation
     {
         public UniFormRoot CreateForm(object o)
         {
-            var props = o.GetType().GetProperties();
+            var oType = o.GetType();
+
+            var props = oType.GetProperties();
+            var meta = oType.GetCustomAttribute<UniFormAttribute>() ?? new UniFormAttribute(null, null, true);
 
             var fieldList = new List<UniFormField>();
 
             foreach (var p in props)
             {
-                var r = TryDecode(p, o);
+                var r = TryDecode(p, o, meta.AutomaticPropertyInclusion);
 
                 if (r == null) continue;
 
@@ -27,15 +31,20 @@ namespace UniForm.Engine.Generation
             return new UniFormRoot(fieldList.OrderBy(x => x.Priority).ThenBy(x => x.Name).ToArray());
         }
         
-        private static UniFormField TryDecode(PropertyInfo i, object o)
+        private static UniFormField TryDecode(PropertyInfo i, object o, bool autoInclude)
         {
             var t = i.PropertyType;
 
-            var ffa = i.GetCustomAttribute<UniFormFieldAttribute>();
+            var ignoreField = i.GetCustomAttribute<UniFormFieldIgnoredAttribute>();
+            if (ignoreField != null) return null;
 
+            var ffa = i.GetCustomAttribute<UniFormFieldAttribute>();
+            if (!autoInclude && ffa == null) return null;
+            
             var name = ffa?.Name ?? i.Name;
             var description = ffa?.Description;
             var priority = ffa?.Priority ?? int.MaxValue;
+            var type = ffa?.Type ?? Core.Models.UniFormFieldTypes.AutoCollection;
 
             UniFormField f = null;
 
@@ -85,7 +94,10 @@ namespace UniForm.Engine.Generation
             }
             else if (t == typeof(string))
             {
-                f = new UniFormFieldString(i, o, name, description, priority);
+                var isMultiline = type == UniFormFieldTypes.MultiLineString;
+                var isBlob = type == UniFormFieldTypes.BlobString;
+
+                f = new UniFormFieldString(i, o, name, description, priority, isMultiline || isBlob, isBlob);
             }
             else if (t.BaseType == typeof(Enum))
             {

@@ -10,7 +10,6 @@ namespace UniForm.Examples.Wpf
             DataContext = this;
         }
 
-        public object ExampleA { get; } = new ExampleConfigurationWithRootAttribute();
-        public object ExampleB { get; } = new ExampleConfigurationWithoutRootAttribute();
+        public object ExampleA { get; } = new ExampleCatForm();
     }
 }

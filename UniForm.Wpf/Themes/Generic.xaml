@@ -22,6 +22,19 @@
                                 <DataTemplate DataType="{x:Type forms:UniFormField}">
                                     <TextBox Text="{Binding Value}"  />
                                 </DataTemplate>
+                                <DataTemplate DataType="{x:Type forms:UniFormFieldString}">
+                                    <TextBox x:Name="stringField" Text="{Binding Value}"  />
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsMultiline}" Value="True">
+                                            <Setter TargetName="stringField" Property="AcceptsReturn" Value="True" />
+                                            <Setter TargetName="stringField" Property="TextWrapping" Value="Wrap" />
+                                            <Setter TargetName="stringField" Property="MinHeight" Value="60" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsBlob}" Value="True">
+                                            <Setter TargetName="stringField" Property="MinHeight" Value="200" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
                                 <DataTemplate DataType="{x:Type forms:UniFormFieldEnum}">
                                     <controls:EnumBox SelectedItem="{Binding Value, Mode=TwoWay}"  />
                                 </DataTemplate>

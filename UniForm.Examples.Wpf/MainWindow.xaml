@@ -8,9 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <UniformGrid Rows="1">
+    <ScrollViewer Margin="10">
         <wpf:UniFormControl Margin="10" Content="{Binding ExampleA}" />
-        <wpf:UniFormControl Margin="10" Content="{Binding ExampleB}" />
-    </UniformGrid>
+    </ScrollViewer>
 
 </Window>
