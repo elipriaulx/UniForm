@@ -10,6 +10,11 @@ namespace UniForm.Engine.Generation
 {
     public class UniFormGenerator
     {
+        public class StaticSource
+        {
+
+        }
+
         public UniFormRoot CreateForm(object o)
         {
             var oType = o.GetType();
@@ -17,18 +22,30 @@ namespace UniForm.Engine.Generation
             var props = oType.GetProperties();
             var meta = oType.GetCustomAttribute<UniFormAttribute>() ?? new UniFormAttribute(null, null, true);
 
-            var fieldList = new List<UniFormField>();
+            var fieldList = new Dictionary<string, UniFormField>();
+            var staticSources = new Dictionary<string, StaticSource>();
+            var staticSourceMappings = new Dictionary<string, string>();
+            var dynamicSourceMappings = new Dictionary<string, string>();
+
+            // build fields
+
+            // attach source list?
 
             foreach (var p in props)
             {
+
+                var ignoreField = p.GetCustomAttribute<UniFormFieldIgnoredAttribute>();
+                var sourceFor = p.GetCustomAttributes<UniFormFieldSourceCollectionAttribute>();
+
+
                 var r = TryDecode(p, o, meta.AutomaticPropertyInclusion);
 
                 if (r == null) continue;
 
-                fieldList.Add(r);
+                fieldList.Add(p.Name, r);
             }
 
-            return new UniFormRoot(fieldList.OrderBy(x => x.Priority).ThenBy(x => x.Name).ToArray());
+            return new UniFormRoot(fieldList.Values.OrderBy(x => x.Priority).ThenBy(x => x.Name).ToArray());
         }
         
         private static UniFormField TryDecode(PropertyInfo i, object o, bool autoInclude)
