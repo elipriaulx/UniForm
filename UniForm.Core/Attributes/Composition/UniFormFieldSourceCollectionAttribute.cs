@@ -7,9 +7,12 @@ namespace UniForm.Core.Attributes.Composition
     {
         public string TargetPropertyName { get; }
 
-        public UniFormFieldSourceCollectionAttribute(string targetPropertyName)
+        public string DefaultDisplayMemberName { get; }
+
+        public UniFormFieldSourceCollectionAttribute(string targetPropertyName, string defaultDisplayMemberName = null)
         {
             TargetPropertyName = targetPropertyName;
+            DefaultDisplayMemberName = defaultDisplayMemberName;
         }
     }
 }

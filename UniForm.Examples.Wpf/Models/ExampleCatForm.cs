@@ -14,12 +14,15 @@ namespace UniForm.Examples.Wpf.Models
 
         [UniFormField(priority: 1)]
         public string Occupation { get; set; } = "Lap Warmer";
+        
+        [UniFormField("Hated Snacks")]
+        public ISet<CatFoods> HatedSnacks { get; set; } = new HashSet<CatFoods>();
 
         [UniFormField("Favourite Snack")]
         public CatFoods FavouriteSnack { get; set; } = CatFoods.Moth;
 
         [UniFormField("Bio", "A short biography.", type: UniFormFieldTypes.BlobString)]
-        public string Biography { get; set; } = "This cat, was no ordinary cat. Sure he had 4 legs and a tail, and 12 crooked whiskers which complimented his stubborn eye brows; but his idiosyncratic nature earned him a league of his own.";
+        public string Biography { get; set; } = "Archibald was no ordinary cat. Sure he had 4 legs and a tail, and 12 crooked whiskers which complimented his stubborn eye brows; but his idiosyncratic nature earned him top position in a league of his own.";
 
         [UniFormField("Friend Names", type: UniFormFieldTypes.AutoCollection)]
         public List<string> FriendNames { get; set; } = new List<string>();

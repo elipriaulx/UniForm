@@ -9,7 +9,7 @@ namespace UniForm.Wpf
 {
     public class UniFormControl : Control
     {
-        private static readonly UniFormGenerator _g = new UniFormGenerator();
+        private static readonly FormGenerator _g = new FormGenerator();
 
         static UniFormControl()
         {

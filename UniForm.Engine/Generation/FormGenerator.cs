@@ -8,60 +8,65 @@ using UniForm.Engine.Forms;
 
 namespace UniForm.Engine.Generation
 {
-    public class UniFormGenerator
+    public class FormGenerator
     {
-        public class StaticSource
-        {
-
-        }
 
         public UniFormRoot CreateForm(object o)
         {
             var oType = o.GetType();
 
             var props = oType.GetProperties();
-            var meta = oType.GetCustomAttribute<UniFormAttribute>() ?? new UniFormAttribute(null, null, true);
+            var meta = oType.GetCustomAttribute<UniFormAttribute>() ?? new UniFormAttribute(null, null, true, UniFormFieldOrder.None);
+            var propMeta = props.Select(p => new CandidateFieldData(p)).ToList();
 
             var fieldList = new Dictionary<string, UniFormField>();
-            var staticSources = new Dictionary<string, StaticSource>();
-            var staticSourceMappings = new Dictionary<string, string>();
-            var dynamicSourceMappings = new Dictionary<string, string>();
-
-            // build fields
-
-            // attach source list?
-
-            foreach (var p in props)
+            
+            foreach (var p in propMeta)
             {
-
-                var ignoreField = p.GetCustomAttribute<UniFormFieldIgnoredAttribute>();
-                var sourceFor = p.GetCustomAttributes<UniFormFieldSourceCollectionAttribute>();
-
-
-                var r = TryDecode(p, o, meta.AutomaticPropertyInclusion);
+                if (p.IsExplicitlyIgnored || (!meta.AutomaticPropertyInclusion && !p.IsUniFormFieldAttributePresent)) continue;
+                
+                var r = TryDecode(p, o);
 
                 if (r == null) continue;
 
                 fieldList.Add(p.Name, r);
             }
 
-            return new UniFormRoot(fieldList.Values.OrderBy(x => x.Priority).ThenBy(x => x.Name).ToArray());
+            IEnumerable<UniFormField> v = fieldList.Values;
+
+            switch (meta.FieldOrder)
+            {
+                case UniFormFieldOrder.None:
+                    break;
+                case UniFormFieldOrder.Name:
+                    v = v.OrderBy(x => x.Name);
+                    break;
+                case UniFormFieldOrder.NameThenPriority:
+                    v = v.OrderBy(x => x.Name).ThenBy(x => x.Priority);
+                    break;
+                case UniFormFieldOrder.Priority:
+                    v = v.OrderBy(x => x.Priority);
+                    break;
+                case UniFormFieldOrder.PriorityThenName:
+                    v = v.OrderBy(x => x.Priority).ThenBy(x => x.Name);
+                    break;
+                default:
+                    // TODO
+                    break;
+            }
+
+            return new UniFormRoot(v.ToArray());
         }
         
-        private static UniFormField TryDecode(PropertyInfo i, object o, bool autoInclude)
+        private static UniFormField TryDecode(CandidateFieldData fieldData, object o)
         {
-            var t = i.PropertyType;
+            var t = fieldData.PropertyType;
+            var i = fieldData.ReflectedPropertyInfo;
 
-            var ignoreField = i.GetCustomAttribute<UniFormFieldIgnoredAttribute>();
-            if (ignoreField != null) return null;
-
-            var ffa = i.GetCustomAttribute<UniFormFieldAttribute>();
-            if (!autoInclude && ffa == null) return null;
-            
-            var name = ffa?.Name ?? i.Name;
-            var description = ffa?.Description;
-            var priority = ffa?.Priority ?? int.MaxValue;
-            var type = ffa?.Type ?? Core.Models.UniFormFieldTypes.AutoCollection;
+            var name = fieldData.Name;
+            var description = fieldData.Description;
+            var priority = fieldData.Priority;
+            var type = fieldData.DesiredFieldType;
 
             UniFormField f = null;
 
